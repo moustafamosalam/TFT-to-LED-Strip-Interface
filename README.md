@@ -62,7 +62,7 @@ Both ESP32s must be on the same Wi-Fi channel, and peer MAC addresses must be re
 
 ### Video Demonstration
 
-[![Watch the Demo](images/1.png)](video/Main.mp4)  
+![Watch the Demo](video/Main.mp4)  
 *Click to watch the demo (MP4 video)*
 
 ---
