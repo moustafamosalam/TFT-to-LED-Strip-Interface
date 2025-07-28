@@ -1,186 +1,89 @@
-\# ESP32 Touchscreen-Controlled RGB LED Mirror
+# TouchSync
 
-
-
-This project uses \*\*two ESP32 microcontrollers\*\*, a \*\*SPI capacitive touch TFT screen\*\*, and an \*\*RGB LED strip\*\* to create a dynamic light display that mirrors touch input from the screen. The LED strip is physically arranged to match the screen's dimensions (rectangle), so each touch on the screen corresponds to a specific LED on the strip.
-
-
+**TouchSync** is a wireless, interactive lighting system built with two ESP32 boards, a capacitive TFT touchscreen, and an RGB LED strip. Touch input on the screen is mirrored in real-time on a corresponding LED in the strip — thanks to ESP-NOW communication.
 
 ---
 
+## ✨ Project Overview
 
+- **ESP32 #1** connects to the **TFT capacitive touchscreen**. It detects touch input and calculates screen coordinates.
+- **ESP32 #2** drives the **RGB LED strip**, arranged to match the screen’s layout (rectangle).
+- The two ESP32s communicate over **ESP-NOW**, a fast, connectionless wireless protocol by Espressif.
 
-\## ✨ Project Overview
-
-
-
-\- \*\*ESP32 #1\*\* is connected to the \*\*TFT touchscreen display\*\*. It detects touch input and calculates the coordinates.
-
-\- \*\*ESP32 #2\*\* is connected to the \*\*RGB LED strip\*\*. It lights up the LED that corresponds to the position touched on the screen.
-
-\- The two ESP32s communicate wirelessly using \*\*ESP-NOW\*\*, a fast, connectionless Wi-Fi communication protocol developed by Espressif.
-
-
-
-The result is a real-time, wireless, interactive LED "mirror" of the user's touches on the screen.
-
-
+This creates a smooth, low-latency system where each touch lights up the corresponding LED, creating a “mirror” of touch on the strip.
 
 ---
 
+## 🧩 Hardware Components
 
-
-\## 🧩 Hardware Components
-
-
-
-\- 2 × \*\*ESP32\*\* boards (e.g., ESP32 DevKit V1)
-
-\- 1 × \*\*SPI TFT capacitive touchscreen\*\* (e.g., ILI9488 or XPT2046-based)
-
-\- 1 × \*\*RGB LED strip\*\* (e.g., WS2812B), arranged in a rectangle to match screen layout
-
-\- Power source (USB or battery)
-
-\- Level shifters (if needed, depending on LED strip and touchscreen)
-
-
+- 2 × **ESP32 Dev Boards**
+- 1 × **SPI Capacitive TFT Touchscreen** (e.g., ILI9488 with XPT2046)
+- 1 × **WS2812B RGB LED Strip** (arranged to match the screen layout)
+- Power source (USB or battery)
+- Optional: Level shifter (for LED strip, if 5V)
 
 ---
 
+## 📡 Communication
 
+### ESP-NOW
 
-\## 📡 Communication
+- No Wi-Fi router is required.
+- **ESP32 #1 (Touch)** sends touch coordinates.
+- **ESP32 #2 (LED)** receives and processes the LED command.
 
-
-
-\### ESP-NOW
-
-
-
-\- \*\*ESP-NOW\*\* is used for low-latency wireless communication between the two ESP32 devices.
-
-\- Touch coordinates are sent from ESP32 #1 to ESP32 #2 in real-time.
-
-\- No Wi-Fi router is required.
-
-
+Both ESP32s must be on the same Wi-Fi channel, and peer MAC addresses must be registered.
 
 ---
 
+## 🔌 System Wiring
 
+### ESP32 #1 — Touch Controller
 
-\## 🔌 Wiring Overview
+- Communicates with TFT screen over SPI
+- Detects touch coordinates
+- Sends mapped data via ESP-NOW
 
+### ESP32 #2 — LED Controller
 
-
-\### ESP32 #1 (Touchscreen Controller)
-
-\- Connects to TFT screen via SPI
-
-\- Detects touch input
-
-\- Sends data via ESP-NOW
-
-
-
-\### ESP32 #2 (LED Controller)
-
-\- Connects to RGB LED strip
-
-\- Receives touch coordinates
-
-\- Lights up the corresponding LED
-
-
+- Drives RGB LED strip
+- Receives LED index and color via ESP-NOW
+- Lights up the corresponding LED
 
 ---
 
+## 📸 Media
+
+### Demo Images
+
+![Touchscreen Interface](images/1.png)  
+*Touchscreen connected to ESP32 #1*
 
 
-\## 📷 Media
+### Video Demonstration
 
-
-
-\### Demo Images
-
-
-
-!\[Touchscreen Interface](images/1.png)
-
-
-
-\### Video Demonstration
-
-
-
-\[!\[Watch the demo](images/video\_thumb.jpg)](video/Main.mp4)
-
-\*A video showing real-time interaction between screen and LED strip.\*
-
-
+[![Watch the Demo](images/1.png)](video/Main.mp4)  
+*Click to watch the demo (MP4 video)*
 
 ---
 
+## 🚀 Workflow
 
-
-\## 🚀 How It Works
-
-
-
-1\. \*\*User touches the screen\*\*.
-
-2\. ESP32 #1 reads the touch coordinates (X, Y).
-
-3\. Coordinates are \*\*mapped to the corresponding LED index\*\* based on screen-to-strip geometry.
-
-4\. ESP32 #1 sends the LED index (and optionally color data) to ESP32 #2 using ESP-NOW.
-
-5\. ESP32 #2 receives the command and lights up the specific LED.
-
-
+1. User touches screen.
+2. ESP32 #1 maps the (X, Y) coordinates to an LED index.
+3. The LED index is sent wirelessly to ESP32 #2 using ESP-NOW.
+4. ESP32 #2 lights up the mapped LED on the RGB strip.
 
 ---
 
+## 💡 Customization Ideas
 
-
-\## 🧠 Customization Ideas
-
-
-
-\- Multi-touch support (if the screen allows)
-
-\- Dynamic color patterns based on swipe direction or pressure
-
-\- Add animations or fade effects to LEDs
-
-\- Two-way communication for feedback
-
-
+- Add color control (e.g., rainbow or pressure-based)
+- Multi-touch (if your display supports it)
+- LED animations on touch
+- Use screen gestures to trigger patterns
 
 ---
 
-
-
-\## ⚠️ Notes
-
-
-
-\- Ensure both ESP32s are on the same Wi-Fi channel (even if not connected to a router).
-
-\- ESP-NOW MAC address pairing is required.
-
-\- Capacitive touchscreen libraries may require calibration.
-
-
-
----
-
-
-
-\## 📁 File Structure
-
-
-
-
+## 📁 Folder Structure
 
