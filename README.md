@@ -82,8 +82,3 @@ Both ESP32s must be on the same Wi-Fi channel, and peer MAC addresses must be re
 - Multi-touch (if your display supports it)
 - LED animations on touch
 - Use screen gestures to trigger patterns
-
----
-
-## 📁 Folder Structure
-
