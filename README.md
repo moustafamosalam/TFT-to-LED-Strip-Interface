@@ -106,7 +106,7 @@ The result is a real-time, wireless, interactive LED "mirror" of the user's touc
 
 
 
-!\[Touchscreen Interface](images/1.jpg)
+!\[Touchscreen Interface](images/1.png)
 
 
 
